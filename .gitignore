@@ -12,3 +12,7 @@ Justfile
 !.*.toml
 !.*.yaml
 !.*.yml
+
+# testing stuff
+Old_Research_Proposal.pdf
+HANDOFF.md
