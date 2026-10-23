@@ -10,7 +10,7 @@ the full diff against the upstream sources is [`../upstream.diff`](../upstream.d
 
 ## Reproduce
 
-Verus 0.2026.05.03 with its bundled vstd (the bare binary; `cargo verus` crashes with this build):
+Verus 0.2026.10.18 with its bundled vstd (the bare binary; `cargo verus` crashes with this build). The original pass used 0.2026.05.03, which needs `iter.end` in place of `iter.iter.end` in the three loop invariants:
 
     verus --crate-type=lib --cfg 'feature="std"' --cfg 'feature="alloc"' src/lib.rs   # 26 verified, 0 errors
     verus --crate-type=lib --cfg 'feature="alloc"' src/lib.rs                          # no_std + alloc

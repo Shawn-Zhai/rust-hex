@@ -396,7 +396,7 @@ pub fn decode_to_slice<T: AsRef<[u8]>>(data: T, out: &mut [u8]) -> (r: Result<()
     // Verus: iterator adapters (`chunks_exact`/`zip`/`enumerate`) are unsupported in `for`; index loop instead.
     for i in iter: 0..out.len()
         invariant
-            iter.end == old(out)@.len(),
+            iter.iter.end == old(out)@.len(),
             out@.len() == old(out)@.len(),
             data@.len() == 2 * old(out)@.len(),
             all_hex(data@, 2 * i),
@@ -433,7 +433,7 @@ pub fn decode_in_slice(in_out: &mut [u8]) -> (r: Result<(), FromHexError>)
     // Reads at 2i, 2i+1 stay ahead of writes at i, so the input is still intact where it is read.
     for i in iter: 0..(in_out.len() / 2)
         invariant
-            iter.end == old(in_out)@.len() / 2,
+            iter.iter.end == old(in_out)@.len() / 2,
             in_out@.len() == old(in_out)@.len(),
             old(in_out)@.len() % 2 == 0,
             all_hex(old(in_out)@, 2 * i),
@@ -484,7 +484,7 @@ fn encode_to_slice_inner(
     // Verus: iterator adapters (`zip`/`chunks_exact_mut`) are unsupported in `for`; index loop instead.
     for i in iter: 0..input.len()
         invariant
-            iter.end == input@.len(),
+            iter.iter.end == input@.len(),
             output@.len() == old(output)@.len(),
             output@.len() == 2 * input@.len(),
             forall|j: int| 0 <= j < i ==> {
